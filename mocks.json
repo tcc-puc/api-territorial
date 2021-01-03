@@ -1,0 +1,29 @@
+{
+    "id": 1234,
+    "inscricao": "180434",
+    "codigoLogradouro": "039748",
+    "proprietario": {
+        "nome": "Luan Fagundes"
+    },
+    "endereco": {
+        "logradouro": "Rua mario luigi souza",
+        "cep": "08230-030",
+        "bairro": "Campo Alegre",
+        "uf": "MG"
+    },
+    "localizacao": {
+        "logradouro": "Rua Herreira (Cond. Res. Pathernon).",
+        "bairro": "Parque dos rodoviários"
+    },
+    "terreno": {
+        "area": "420",
+        "valMetroQuadrado": 2000,
+        "caracteristicas": "1 - Nāo construído",
+        "situacao": "Uma Frente",
+        "limitacao": "murado",
+        "pedologia": "1 - Normal",
+        "topografia": "4 - Plano",
+        "configuracao": "lote urbano",
+        "idadeMeses": "36"
+    }
+}
