@@ -2,6 +2,21 @@ const express = require("express");
 const mocks = require('./mocks.json');
 const server = express();
 
+
+// TODO: Remover Prometheus desse arquivo
+const client = require('prom-client');
+const collectDefaultMetrics = client.collectDefaultMetrics;
+
+// Probe every 5th second.
+collectDefaultMetrics({ timeout: 5000 });
+
+const counter = new client.Counter({
+  name: 'node_request_operations_total',
+  help: 'The total number of processed requests'
+});
+// / Prometheus
+
+
 server.use(express.json());
 
 /**
@@ -36,9 +51,18 @@ function calcAliquota(valVenal, tributo = 1) {
 }
 
 /**
+ * Metrics Prometheus endpoint
+ */
+server.get('/metrics', (req, res) => {
+  res.set('Content-Type', client.register.contentType)
+  res.end(client.register.metrics())
+})
+
+/**
  * Conferir status da API
  */
 server.get("/", (req, res) => {
+  counter.inc();
   res.send("API territorial running");
 });
 
