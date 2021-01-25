@@ -1,0 +1,219 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API territorial - prefeitura de Bom Destino",
+    "description": "API territorial fornece os dados de imposto para ser consumido nas aplicações da prefeitura.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3030",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Imposto",
+      "description": "Dados de cálculo de imposto para os cidadãos."
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "paths": {
+    "/calcular/iptu/{inscricao}": {
+      "get": {
+        "tags": ["Imposto"],
+        "summary": "Retorna o cálculo de IPTU para o usuário",
+        "parameters": [
+          {
+            "name": "inscricao",
+            "in": "path",
+            "description": "número",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Imposto"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/calcular/itr/{inscricao}": {
+      "get": {
+        "tags": ["Imposto"],
+        "summary": "Retorna o cálculo de ITR para o usuário",
+        "parameters": [
+          {
+            "name": "inscricao",
+            "in": "path",
+            "description": "número",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Imposto"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Imposto": {
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "inscricao": {
+          "type": "string"
+        },
+        "codigoLogradouro": {
+          "type": "string"
+        },
+        "endereco": {
+          "type": "object",
+          "properties": {
+            "logradouro": {
+              "type": "string"
+            },
+            "cep": {
+              "type": "string"
+            },
+            "bairro": {
+              "type": "string"
+            },
+            "uf": {
+              "type": "string"
+            }
+          }
+        },
+        "localizacao": {
+          "type": "object",
+          "properties": {
+            "logradouro": {
+              "type": "string"
+            },
+            "bairro": {
+              "type": "string"
+            }
+          }
+        },
+        "terreno": {
+          "type": "object",
+          "properties": {
+            "area": {
+              "type": "string"
+            },
+            "valMetroQuadrado": {
+              "type": "string"
+            },
+            "caracteristicas": {
+              "type": "string"
+            },
+            "situacao": {
+              "type": "string"
+            },
+            "limitacao": {
+              "type": "string"
+            },
+            "pedologia": {
+              "type": "string"
+            },
+            "topografia": {
+              "type": "string"
+            },
+            "configuracao": {
+              "type": "string"
+            },
+            "idadeMeses": {
+              "type": "string"
+            }
+          }
+        },
+        "edificacao": {
+          "type": "object",
+          "properties": {
+            "area": {
+              "type": "string"
+            },
+            "caracteristicas": {
+              "type": "string"
+            },
+            "situacao": {
+              "type": "string"
+            },
+            "utilizacao": {
+              "type": "string"
+            },
+            "revestimento": {
+              "type": "string"
+            },
+            "estado": {
+              "type": "string"
+            },
+            "situacaoImovel": {
+              "type": "string"
+            },
+            "zonaFiscal": {
+              "type": "string"
+            },
+            "valorRenal": {
+              "type": "integer"
+            },
+            "aliquota": {
+              "type": "integer"
+            }
+          }
+        },
+        "codigoBarras": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": ["error", "message", "detail", "help"],
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "help": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
